@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DetailSurahActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvNamaSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Surah"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        style="@style/TextAppearance.AppCompat.Title"/>
+
+
+    <TextView
+        android:id="@+id/tvNamaArabicSurah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNamaSurah"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Arabic Surah"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tvNamaSimpleSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNamaArabicSurah"
+        android:text="Nama Simple Surah" />
+
+    <TextView
+        android:id="@+id/tvIDSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNamaComplexSurah"
+        android:text="ID Surah" />
+
+    <TextView
+        android:id="@+id/tvNamaComplexSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Complex Surah"
+        android:layout_below="@+id/tvNamaSimpleSurah"/>
+
+    <TextView
+        android:id="@+id/tvUrutanTurunSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Urutan Turun Surah"
+        android:layout_below="@+id/tvIDSurah"/>
+
+    <TextView
+        android:id="@+id/tvTempatTurunSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tempat Turun Surah"
+        android:layout_below="@+id/tvUrutanTurunSurah"/>
+
+    <TextView
+        android:id="@+id/tvJumlahAyatSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jumlah Ayat Surah"
+        android:layout_below="@+id/tvTempatTurunSurah"/>
+
+</RelativeLayout>

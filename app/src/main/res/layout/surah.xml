@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvSurahLatin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Al-Fatihah"
+        style="@style/TextAppearance.AppCompat.Title" />
+    <TextView
+        android:id="@+id/tvTerjemahanSurah"
+        android:layout_below="@id/tvSurahLatin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Al-Fātiĥah" />
+
+    <TextView
+        android:id="@+id/tvSurahArab"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_alignParentEnd="true"
+        android:text="الفاتحة"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
