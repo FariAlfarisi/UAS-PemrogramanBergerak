@@ -1,10 +1,29 @@
 package com.pemrogramanbergerak.quranap;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.pemrogramanbergerak.quranap.ModelAyat.Ayat;
+import com.pemrogramanbergerak.quranap.ModelAyat.VersesItem;
+import com.pemrogramanbergerak.quranap.retrofit.ApiService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ModelTerjemahan.TranslationsItem;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DetailSurahActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private AyatAdapter ayatAdapter;
+    private List<VersesItem> ayatResults = new ArrayList<>();
 
     TextView textViewNamaSurah;
     TextView textViewNameSimpleSurah;
@@ -52,8 +71,40 @@ public class DetailSurahActivity extends AppCompatActivity {
         textViewJumlahAyatSurah = findViewById(R.id.tvJumlahAyatSurah);
         textViewJumlahAyatSurah.setText("Jumlah Ayat: " + (versesCount) + " ayat");
 
+    setUpView();
+    setUpRecyclerView();
+    getDataFromApi(id);
+
     }
 
+    private void getDataFromApi(int id) {
+        ApiService.endpoint().getAyat(id).enqueue(new Callback<Ayat>() {
+            @Override
+            public void onResponse(Call<Ayat> call, Response<Ayat> response) {
+                if (response.isSuccessful()){
+                    List<VersesItem> result = response.body().getVerses();
+                    Log.d("AyatTest", result.toString());
+                    ayatAdapter.setData(result);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Ayat> call, Throwable t) {
+                Log.d("AyatTest", t.toString());
+            }
+        });
+    }
+
+    private void setUpRecyclerView() {
+        ayatAdapter = new AyatAdapter(ayatResults);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(ayatAdapter);
+    }
+
+    private void setUpView() {
+        recyclerView = findViewById(R.id.recyclerViewAyat);
+    }
 
 
 }

@@ -9,10 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pemrogramanbergerak.quranap.ModelAyat.VersesItem;
 import com.pemrogramanbergerak.quranap.ModelSurah.ChaptersItem;
 
 
 import java.util.List;
+
+import ModelTerjemahan.Terjemahan;
+import ModelTerjemahan.TranslationsItem;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
     private List<ChaptersItem> results;
@@ -25,7 +29,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     @Override
     public MainAdapter.MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.surah, parent, false);
-
 
         return new MainViewHolder(view);
     }
@@ -61,7 +64,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     }
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewSurahLatin, textViewTerjemahanSurah, textViewJumlahAyat, textViewSurahArab;
+        TextView textViewSurahLatin, textViewTerjemahanSurah, textViewSurahArab;
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewSurahLatin = itemView.findViewById(R.id.tvSurahLatin);
@@ -70,7 +73,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         }
     }
 
-    public void setData(List<ChaptersItem> data ){
+    public void setData(List<ChaptersItem> data ) {
         results.clear();
         results.addAll(data);
         notifyDataSetChanged();

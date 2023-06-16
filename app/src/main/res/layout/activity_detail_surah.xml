@@ -74,4 +74,11 @@
         android:text="Jumlah Ayat Surah"
         android:layout_below="@+id/tvTempatTurunSurah"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAyat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvJumlahAyatSurah"
+        android:layout_marginTop="16dp"/>
+
 </RelativeLayout>
