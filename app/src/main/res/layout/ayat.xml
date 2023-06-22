@@ -7,11 +7,11 @@
     <TextView
         android:id="@+id/tvAyatArab"
         android:layout_width="wrap_content"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="Ayat"
         android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textSize="25dp"
         android:textStyle="bold" />
 
     <TextView

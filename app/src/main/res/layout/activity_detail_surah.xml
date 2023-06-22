@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".DetailSurahActivity"
     android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/infoSurah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvNamaSurah"
@@ -22,10 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvNamaSurah"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
+        android:layout_gravity="end"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:text="Arabic Surah"
         android:textSize="35dp"
@@ -74,11 +78,22 @@
         android:text="Jumlah Ayat Surah"
         android:layout_below="@+id/tvTempatTurunSurah"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAyat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvJumlahAyatSurah"
-        android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAyat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/infoSurah"
+            android:layout_marginTop="16dp"/>
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerViewAudio"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/ayatTerjemahan"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            />-->
 
 </RelativeLayout>

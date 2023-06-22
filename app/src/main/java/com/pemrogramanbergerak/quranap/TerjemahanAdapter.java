@@ -46,10 +46,9 @@ public class TerjemahanAdapter extends RecyclerView.Adapter<TerjemahanAdapter.Te
             textViewTerjemahanAyat = itemView.findViewById(R.id.tvTerjemahanAyat);
         }
     }
-
-    public void setData(List<TranslationsItem> data){
-        results.clear();
-        results.addAll(data);
+    public void setData(List<TranslationsItem> newDataList) {
+        newDataList.clear();
+        newDataList.addAll(newDataList);
         notifyDataSetChanged();
     }
 }

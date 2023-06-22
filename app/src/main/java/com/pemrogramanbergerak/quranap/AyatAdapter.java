@@ -46,10 +46,10 @@ public class AyatAdapter extends RecyclerView.Adapter<AyatAdapter.AyatViewHolder
             textViewAyatSurah = itemView.findViewById(R.id.tvAyatArab);
         }
     }
-
-    public void setData(List<VersesItem> data) {
-        results.clear();
-        results.addAll(data);
+    public void setData(List<VersesItem> newDataList) {
+        newDataList.clear();
+        newDataList.addAll(newDataList);
         notifyDataSetChanged();
+
     }
 }
