@@ -9,37 +9,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pemrogramanbergerak.quranap.ModelAyat.VersesItem;
+import com.pemrogramanbergerak.quranap.ModelAudio.AudioFilesItem;
 import com.pemrogramanbergerak.quranap.ModelSurah.ChaptersItem;
 
 
 import java.util.List;
 
-import ModelTerjemahan.Terjemahan;
-import ModelTerjemahan.TranslationsItem;
-
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-    private List<ChaptersItem> results;
+    private List<ChaptersItem> chaptersItems;
 
-    public MainAdapter(List<ChaptersItem> results) {
-        this.results = results;
+    private List<AudioFilesItem> audioFilesItems;
+
+    public MainAdapter(List<ChaptersItem> chaptersItemList, List<AudioFilesItem> audioFilesItemList) {
+        this.chaptersItems = chaptersItemList;
+        this.audioFilesItems = audioFilesItemList;
     }
 
     @NonNull
     @Override
-    public MainAdapter.MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.surah, parent, false);
+    public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.surah, parent, false );
 
         return new MainViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainAdapter.MainViewHolder holder, int position) {
-        final ChaptersItem chapters = results.get(position);
+    public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
+        ChaptersItem chapters = chaptersItems.get(position);
+        AudioFilesItem audio = audioFilesItems.get(position);
 
-        holder.textViewSurahLatin.setText(chapters.getNameComplex());
+        holder.textViewSurahLatin.setText(chapters.getNameSimple());
         holder.textViewTerjemahanSurah.setText(chapters.getTranslatedName().getName());
         holder.textViewSurahArab.setText(chapters.getNameArabic());
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                 intent.putExtra("revelation_order", chapters.getRevelationOrder());
                 intent.putExtra("revelation_place", chapters.getRevelationPlace());
                 intent.putExtra("verses_count", chapters.getVersesCount());
-
+                intent.putExtra("audio_url", audio.getAudioUrl());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -60,7 +63,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     @Override
     public int getItemCount() {
-        return results.size();
+        return chaptersItems.size();
     }
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
@@ -70,13 +73,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             textViewSurahLatin = itemView.findViewById(R.id.tvSurahLatin);
             textViewTerjemahanSurah = itemView.findViewById(R.id.tvTerjemahanSurah);
             textViewSurahArab = itemView.findViewById(R.id.tvSurahArab);
+
         }
     }
 
-    public void setData(List<ChaptersItem> data ) {
-        results.clear();
-        results.addAll(data);
+    public  void setData(List<ChaptersItem> surahData, List<AudioFilesItem> audioData){
+        chaptersItems.clear();
+        chaptersItems.addAll(surahData);
+
+        audioFilesItems.clear();
+        audioFilesItems.addAll(audioData);
         notifyDataSetChanged();
     }
-}
 
+}

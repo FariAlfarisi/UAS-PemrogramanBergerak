@@ -1,20 +1,26 @@
 package com.pemrogramanbergerak.quranap;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.pemrogramanbergerak.quranap.ModelAyat.Ayat;
 import com.pemrogramanbergerak.quranap.ModelAyat.VersesItem;
 import com.pemrogramanbergerak.quranap.retrofit.ApiService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pemrogramanbergerak.quranap.ModelTerjemahan.Terjemahan;
+import com.pemrogramanbergerak.quranap.ModelTerjemahan.TranslationsItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,8 +29,12 @@ public class DetailSurahActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AyatAdapter ayatAdapter;
-    List<VersesItem> results = new ArrayList<>();
-
+    private final List<VersesItem> ayatResults = new ArrayList<>();
+    private final List<TranslationsItem> terjemahanResults = new ArrayList<>();
+    List<TranslationsItem> terjemahan;
+    List<VersesItem> ayat;
+    private MediaPlayer mediaPlayer;
+    Button playbutton;
     TextView textViewNamaSurah;
     TextView textViewNameSimpleSurah;
     TextView textViewIDSurah;
@@ -71,10 +81,72 @@ public class DetailSurahActivity extends AppCompatActivity {
         textViewJumlahAyatSurah = findViewById(R.id.tvJumlahAyatSurah);
         textViewJumlahAyatSurah.setText("Jumlah Ayat: " + (versesCount) + " ayat");
 
+        mediaPlayer = new MediaPlayer();
+        String audioUrl = getIntent().getStringExtra("audio_url");
+        playbutton = findViewById(R.id.playButton);
+        playbutton.setOnClickListener(view -> {
+            if (mediaPlayer.isPlaying()){
+                pauseAudio();
+            } else {
+                playAudio(audioUrl);
+            }
+        });
+
         setUpView();
         setUpRecyclerView();
-        getDataFromApi(id);
+        getAyatFromApi(id);
+        getTerjemahanFromApi(id);
+    }
 
+
+    private void getAyatFromApi(int id) {
+        ApiService.endpoint().getAyat(id).enqueue(new Callback<Ayat>() {
+            @Override
+            public void onResponse(Call<Ayat> call, Response<Ayat> response) {
+                if (response.isSuccessful()) {
+                    ayat = response.body().getVerses();
+                    Log.d("AyatTest", ayat.toString());
+                    getAyatFromApi(getIntent().getIntExtra("id",1));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Ayat> call, Throwable t) {
+                Log.d("AyatError", t.toString());
+            }
+        });
+    }
+    private void getTerjemahanFromApi(int id) {
+        ApiService.endpoint().getTerjemahan(id).enqueue(new Callback<Terjemahan>() {
+            @Override
+            public void onResponse(Call<Terjemahan> call, Response<Terjemahan> response) {
+                if (response.isSuccessful()) {
+                    terjemahan = response.body().getTranslations();
+                    Log.d("TerjemahanTest", terjemahan.toString());
+                    ayatAdapter.setData(ayat, terjemahan);
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Terjemahan> call, Throwable t) {
+                Log.d("TerjemahanError", t.toString());
+            }
+        });
+    }
+
+    private void pauseAudio() {
+        if (mediaPlayer.isPlaying()){
+            mediaPlayer.pause();
+        }
+    }
+    private void playAudio(String audio) {
+        try {
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(audio);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void setUpView() {
@@ -82,27 +154,9 @@ public class DetailSurahActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        ayatAdapter = new AyatAdapter(results);
+        ayatAdapter = new AyatAdapter(ayatResults, terjemahanResults);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(ayatAdapter);
-    }
-
-    private void getDataFromApi(int id) {
-        ApiService.endpoint().getAyat(id).enqueue(new Callback<Ayat>() {
-            @Override
-            public void onResponse(Call<Ayat> call, Response<Ayat> response) {
-                if(response.isSuccessful()){
-                    List<VersesItem> result = response.body().getVerses();
-                    Log.d("AyatTest", result.toString());
-                    ayatAdapter.setData(result);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Ayat> call, Throwable t) {
-                Log.d("Ayat", t.toString());
-            }
-        });
     }
 }

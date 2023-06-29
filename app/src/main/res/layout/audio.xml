@@ -3,17 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    <ImageButton
-        android:contentDescription="play button"
-        android:id="@+id/playbutton"
-        android:layout_width="48dp"
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:src="@drawable/play"
-        android:layout_gravity="center"/>
-
-    </LinearLayout>
+        android:text="Play Audio"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package ModelTerjemahan;
+package com.pemrogramanbergerak.quranap.ModelTerjemahan;
 
 import com.google.gson.annotations.SerializedName;
 

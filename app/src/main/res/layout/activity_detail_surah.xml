@@ -13,87 +13,101 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvNamaSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nama Surah"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        style="@style/TextAppearance.AppCompat.Title"/>
+        <TextView
+            android:id="@+id/tvNamaSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Surah"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            style="@style/TextAppearance.AppCompat.Title"/>
 
 
-    <TextView
-        android:id="@+id/tvNamaArabicSurah"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNamaSurah"
-        android:layout_gravity="end"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="Arabic Surah"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tvNamaArabicSurah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNamaSurah"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Arabic Surah"
+            android:textSize="35dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/tvNamaSimpleSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNamaArabicSurah"
-        android:text="Nama Simple Surah" />
+        <TextView
+            android:id="@+id/tvNamaSimpleSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNamaArabicSurah"
+            android:text="Nama Simple Surah"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/tvIDSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNamaComplexSurah"
-        android:text="ID Surah" />
+        <TextView
+            android:id="@+id/tvIDSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNamaComplexSurah"
+            android:text="ID Surah"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/tvNamaComplexSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nama Complex Surah"
-        android:layout_below="@+id/tvNamaSimpleSurah"/>
+        <TextView
+            android:id="@+id/tvNamaComplexSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Complex Surah"
+            android:layout_below="@+id/tvNamaSimpleSurah"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/tvUrutanTurunSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Urutan Turun Surah"
-        android:layout_below="@+id/tvIDSurah"/>
+        <TextView
+            android:id="@+id/tvUrutanTurunSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Urutan Turun Surah"
+            android:layout_below="@+id/tvIDSurah"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/tvTempatTurunSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tempat Turun Surah"
-        android:layout_below="@+id/tvUrutanTurunSurah"/>
+        <TextView
+            android:id="@+id/tvTempatTurunSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tempat Turun Surah"
+            android:layout_below="@+id/tvUrutanTurunSurah"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/tvJumlahAyatSurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Jumlah Ayat Surah"
-        android:layout_below="@+id/tvTempatTurunSurah"/>
+        <TextView
+            android:id="@+id/tvJumlahAyatSurah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jumlah Ayat Surah"
+            android:layout_below="@+id/tvTempatTurunSurah"
+            android:textColor="@color/black" />
 
     </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="395dp"
+        android:layout_height="430dp"
+        android:layout_below="@id/infoSurah"
+
+        android:padding="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewAyat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/infoSurah"
-            android:layout_marginTop="16dp"/>
+            android:layout_height="match_parent" />
+    </androidx.core.widget.NestedScrollView>
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recyclerViewAudio"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/ayatTerjemahan"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            />-->
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Play Audio"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

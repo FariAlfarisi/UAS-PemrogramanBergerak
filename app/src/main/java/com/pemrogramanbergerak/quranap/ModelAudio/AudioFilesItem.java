@@ -1,4 +1,4 @@
-package ModelAudio;
+package com.pemrogramanbergerak.quranap.ModelAudio;
 
 import com.google.gson.annotations.SerializedName;
 
